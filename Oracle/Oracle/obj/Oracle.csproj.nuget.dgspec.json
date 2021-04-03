@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hdelacruz\\Source\\Repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj": {}
+    "C:\\Users\\hdelacruz\\source\\repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hdelacruz\\Source\\Repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj": {
+    "C:\\Users\\hdelacruz\\source\\repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hdelacruz\\Source\\Repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj",
+        "projectUniqueName": "C:\\Users\\hdelacruz\\source\\repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj",
         "projectName": "Oracle",
-        "projectPath": "C:\\Users\\hdelacruz\\Source\\Repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj",
+        "projectPath": "C:\\Users\\hdelacruz\\source\\repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\Oracle.csproj",
         "packagesPath": "C:\\Users\\hdelacruz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hdelacruz\\Source\\Repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\obj\\",
+        "outputPath": "C:\\Users\\hdelacruz\\source\\repos\\yoshisman8\\oracle-bot\\Oracle\\Oracle\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Visual Studio\\Shared\\NuGetPackages"
@@ -44,9 +44,13 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "DiceRoller": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Discord.InteractivityAddon": {
               "target": "Package",
-              "version": "[2.1.1, )"
+              "version": "[2.4.0-dev-20210320.1, )"
             },
             "Discord.Net": {
               "target": "Package",
@@ -55,6 +59,34 @@
             "LiteDB": {
               "target": "Package",
               "version": "[5.0.10, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
