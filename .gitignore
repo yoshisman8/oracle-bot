@@ -2,4 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+/.vs
 /Oracle/Oracle/bin/Debug/netcoreapp3.1
+/Oracle/.vs
+/Oracle/.vs/Oracle
+/Oracle/Oracle/bin
+/Oracle/Oracle/obj
