@@ -415,7 +415,7 @@ namespace Oracle.Modules
                 await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + amount + " willpower.");
             }
         }
-        [Command("RulingArcana"),Alias("StrongArcana","Ruling","Strong")]
+        [Command("RulingArcana"),Alias("StrongArcana","SuperiorArcana","Superior","Ruling","Strong")]
         public async Task StrongArcana(params string[] Arcana)
         {
             User User = Utils.GetUser(Context.User.Id);
