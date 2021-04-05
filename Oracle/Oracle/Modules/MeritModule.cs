@@ -192,7 +192,7 @@ namespace Oracle.Modules
 
             if (Actor.Merits2.Count == 0)
             {
-                await ReplyAsync(Context.User.Mention + ", " + Actor.Name2 + " has no Merits2.");
+                await ReplyAsync(Context.User.Mention + ", " + Actor.Name2 + " has no Merits.");
                 return;
             }
 
@@ -254,7 +254,7 @@ namespace Oracle.Modules
             Actor.Merits2.Add(merit);
             Utils.UpdateActor(Actor);
 
-            await ReplyAsync(Context.User.Mention + ", Added Merit **" + Name2 + "** to " + Actor.Name2 + "'s Merits2 with " + Ranks + " dots into this new merit.");
+            await ReplyAsync(Context.User.Mention + ", Added Merit **" + Name2 + "** to " + Actor.Name2 + "'s Merits with " + Ranks + " dots into this new merit.");
         }
         [Command("Remove"), Alias("Delete", "Del", "Rem")]
         public async Task Delete([Remainder] string Name2)
@@ -281,7 +281,7 @@ namespace Oracle.Modules
                 {
                     Actor.Merits2.Remove(M);
                     Utils.UpdateActor(Actor);
-                    await ReplyAsync(Context.User.Mention + ", Removed merit " + M.Name + " from " + Actor.Name2 + "'s Merits2!");
+                    await ReplyAsync(Context.User.Mention + ", Removed merit " + M.Name + " from " + Actor.Name2 + "'s Merits!");
                     return;
                 }
                 else
@@ -291,7 +291,7 @@ namespace Oracle.Modules
             }
             else
             {
-                await ReplyAsync(Context.User.Mention + ", " + Actor.Name2 + " has no merit whose Name2 starts with \"" + Name2 + "\".");
+                await ReplyAsync(Context.User.Mention + ", " + Actor.Name2 + " has no merit whose Name starts with \"" + Name2 + "\".");
                 return;
             }
         }
@@ -320,12 +320,12 @@ namespace Oracle.Modules
                 Actor.Merits2[I].Ranks = Dots;
                 Utils.UpdateActor(Actor);
 
-                await ReplyAsync(Context.User.Mention + ", Set merit " + Actor.Name2 + "'s " + M.Name + " Merits2 to have " + Dots + "dots.");
+                await ReplyAsync(Context.User.Mention + ", Set merit " + Actor.Name2 + "'s " + M.Name + " Merits to have " + Dots + "dots.");
 
             }
             else
             {
-                await ReplyAsync(Context.User.Mention + ", " + Actor.Name2 + " has no merit whose Name2 starts with \"" + Name2 + "\".");
+                await ReplyAsync(Context.User.Mention + ", " + Actor.Name2 + " has no merit whose Name starts with \"" + Name2 + "\".");
                 return;
             }
         }
