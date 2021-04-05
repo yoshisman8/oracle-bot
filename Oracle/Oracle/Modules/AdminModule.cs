@@ -78,6 +78,17 @@ namespace Oracle.Modules
                 "`" + prefix + "Willpower <+x/-x>` - Uses or regains an amount of willpower.\n"+
                 "`" + prefix + "Ether <+x/-x>` - Uses or regains an amount of Ether.\n"+
                 "`" + prefix + "Restore` - Restores your active character's Health, Willpower and Ether back to maximum.")
+                .AddField("Macros","`"+prefix+"Macros` - Display all the macros you've created for this character.\n"+
+                "`" + prefix + "Macros Add <Name> <Macro>` - Creates a new macro.\n"+
+                "`" + prefix + "Macro Delete <Name>` - Deletes a macro.")
+                .AddField("Encounters", "`" + prefix + "Encounter` - Displays the current active encounte, if any.\n"+
+                "`" + prefix + "Encounter Start` - Starts an encounter in a room. If one has already been started, it sorts the players and pings the first person in initiative.\n"+
+                "`" + prefix +"Encounter Stop` - Stops the current encounter.\n"+
+                "`" + prefix + "Encounter Join` - Adds your current active Human to initiative.\n"+
+                "`" + prefix + "Encounter GJoin` - Adds your current active Guardian to initiative.\n"+
+                "`" + prefix + "Encounter Adds <Name> <Initiative>`- Adds an NPC to initiative.\n"+
+                "`" + prefix + "Encounter Remove <Name>` - Removes someone from initiative.\n"+
+                "`" + prefix + "Encounter Next` - Moves to the next person in initiative.\n")
                 .WithDescription("Parameters encased with `<>` are mandatory while paramaters encased with `[]` are optional.\nIf you wish to input a parameter with spaces (Such as a name + last name) you'll have to encase it in quotation marks. Ex: `!Create \"Ethan Lockwood\" Estiebus`.");
 
             var DMs = await Context.User.GetOrCreateDMChannelAsync();
