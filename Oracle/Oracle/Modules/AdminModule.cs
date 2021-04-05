@@ -54,7 +54,9 @@ namespace Oracle.Modules
                 "`" + prefix +"GAvatar [Image URL]` - As Avatar, but for your current active Guardian character.\n"+
                 "`" + prefix +"SuperiorArcana <Arcanas>` - Sets your superior Arcana. Each arcana must be separated by a space.\n"+
                 "`" + prefix +"InferiorArcana <Arcanas>` - Sets your Inferior arcana. Each arcana must be separated by a space.\n"+
-                "`" + prefix +"OrderSkills <Skills>` - Sets your order skills for your character. Each skill must be separated by a space.\n")
+                "`" + prefix +"OrderSkills <Skills>` - Sets your order skills for your character. Each skill must be separated by a space.\n"+
+                "`" + prefix +"Beat <amount>` - Gives your active character a number of beats.\n"+
+                "`" + prefix +"Experience <Amount>` - Gain or spend a number of experience points.")
                 .AddField("Merits","`"+prefix+"Merits` - View all your merits. Each page contains one merit.\n"+
                 "`" + prefix +"Merits Add <Name> <Initial Dots> <Segments, each encased in quotation marks.>` - Creates a new merit on your *human* character. Each segement **must** be encased in quotation marks. Each segment must note exceed 1024 characters.\n"+
                 "`" + prefix +"Merits Dots <Name> <Dots>` - Change the number of Dots you have into a merit.\n"+

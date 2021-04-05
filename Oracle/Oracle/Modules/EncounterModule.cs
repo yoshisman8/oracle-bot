@@ -72,6 +72,7 @@ namespace Oracle.Modules
                 Encounter.Participants = new List<Participant>();
                 Encounter.Current = null;
                 Encounter.Owner = Context.User.Id;
+                Encounter.First = true;
 
                 col.Update(Encounter);
 
@@ -84,8 +85,14 @@ namespace Oracle.Modules
                 var embed = Encounter.Start(Database);
                 col.Update(Encounter);
 
-                var user = Context.Guild.GetUser(Encounter.Current.Player);
-                await ReplyAsync(user.Mention + ", It's " + Encounter.Current.Name + "'s turn!", false, embed);
+                ulong[] parts = Encounter.Participants.Select(x => x.Player).Distinct().ToArray();
+                string[] mentions = new string[parts.Length];
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    mentions[i] = Context.Guild.GetUser(parts[i]).Mention;
+                }
+                
+                await ReplyAsync(string.Join(", ",mentions)+ "\n***Action declaration time!***", false, embed);
                 return;
             }
             else if(Encounter.Active && Encounter.Started)
@@ -325,8 +332,20 @@ namespace Oracle.Modules
             col.Update(Encounter);
 
             var user = Context.Guild.GetUser(p.Player);
-
-            await ReplyAsync(user.Mention + ", it's " + Encounter.Current.Name + "'s turn!", false, Encounter.GetEncounter(Database));
+            if (Encounter.First)
+            {
+                ulong[] parts = Encounter.Participants.Select(x => x.Player).Distinct().ToArray();
+                string[] mentions = new string[parts.Length];
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    mentions[i] = Context.Guild.GetUser(parts[i]).Mention;
+                }
+                await ReplyAsync(string.Join(", ", mentions) + ".\n**Action declaration time!***", false, Encounter.GetEncounter(Database));
+            }
+            else
+            {
+                await ReplyAsync(user.Mention + ", it's " + Encounter.Current.Name + "'s turn!", false, Encounter.GetEncounter(Database));
+            }
         }
     }
 }

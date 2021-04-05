@@ -18,6 +18,7 @@ namespace Oracle.Data
         public int Round { get; set; } = 1;
         public bool Active { get; set; }
         public bool Started { get; set; }
+        public bool First { get; set; }
 
         /// <summary>
         /// Selects and returns the next person in the inititaive order.
@@ -25,18 +26,28 @@ namespace Oracle.Data
         /// <returns>The current Participant.</returns>
         public Participant Next()
         {
-            int Index = Participants.FindIndex(x=>x.Name == Current.Name);
-            if (Index + 1 >= Participants.Count)
+            if (First)
             {
-                Current = Participants[0];
-                Round++;
+                First = false;
                 return Current;
             }
             else
             {
-                Current = Participants[Index + 1];
-                return Current;
+                int Index = Participants.FindIndex(x => x.Name == Current.Name);
+                if (Index + 1 >= Participants.Count)
+                {
+                    Current = Participants[0];
+                    First = true;
+                    Round++;
+                    return Current;
+                }
+                else
+                {
+                    Current = Participants[Index + 1];
+                    return Current;
+                }
             }
+            
         }
         public Participant Previous()
         {
@@ -63,6 +74,7 @@ namespace Oracle.Data
             Round = 1;
             Current = Participants[0];
             Started = true;
+            First = true;
             return GetEncounter(database);
         }
         /// <summary>
@@ -75,6 +87,7 @@ namespace Oracle.Data
             Round = 0;
             Active = false;
             Started = false;
+            First = false;
             Owner = 0;
         }
         public string Add(string Name, decimal Initiative, ulong Player = 0, Type type = Type.NPC, int ID = -1)
@@ -153,7 +166,11 @@ namespace Oracle.Data
 
             foreach(var x in part)
             {
-                if(Current.Name == x.Name)
+                if (First)
+                {
+                    sb.AppendLine("[" + x.Initiative + "] " + x.Name + ".");
+                }
+                else if(!First && Current.Name == x.Name)
                 {
                     sb.AppendLine("**[" + x.Initiative + "] " + x.Name + ".**");
                     if(x.Type != Type.NPC)
@@ -171,7 +188,7 @@ namespace Oracle.Data
             }
             EmbedBuilder EB = new EmbedBuilder()
                 .WithTitle("Encounter Summary")
-                .WithDescription("Round: "+Round)
+                .WithDescription("**Round**: "+Round+(First?"\n```Action Declaration Phase!```":""))
                 .AddField("Initiative", sb.ToString(),false)
                 .WithCurrentTimestamp();
 

@@ -186,6 +186,9 @@ namespace Oracle.Data
 
         public string[] OrderSkills { get; set; } = new string[0];
 
+        public int Beats { get; set; } = 0;
+        public int Experience { get; set; } = 0;
+
         public Dictionary<string, string> Macros { get; set; } = new Dictionary<string, string>();
         public PageBuilder[] GetSheet()
         {
@@ -248,7 +251,8 @@ namespace Oracle.Data
                     "Gnosis: " + Ranks["gnosis"] + "\n" +
                     "Size: " + Ranks["size"] + "\n" +
                     "Defense: " + (Math.Min(Ranks["dexterity"], Ranks["composure"]) + Ranks["athletics"] + Ranks["armor"]) + "/" + (Math.Min(Ranks["dexterity"], Ranks["composure"]) + Ranks["athletics"] + Ranks["ballistic-armor"]) + "\n" +
-                    "Perception: " + (Ranks["wits"] + Ranks["composure"]), true);
+                    "Perception: " + (Ranks["wits"] + Ranks["composure"])+ "\n"+
+                    "Experience ("+new string('●', Beats)+"): "+Experience, true);
 
             eb[1] = new PageBuilder();
             eb[1].WithTitle(Name2);

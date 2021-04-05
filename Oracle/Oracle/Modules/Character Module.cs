@@ -457,5 +457,70 @@ namespace Oracle.Modules
             Utils.UpdateActor(Actor);
             await ReplyAsync(Context.User.Mention + ", Set " + Actor.Name +"'s Order Skills to: " + string.Join(" & ", Skills) + ".");
         }
+        [Command("Beat"),Alias("Beats")]
+        public async Task Beats(int amount)
+        {
+            amount = Math.Abs(amount);
+            User User = Utils.GetUser(Context.User.Id);
+            Actor Actor = User.Active;
+            if (Actor == null)
+            {
+                await ReplyAsync("You have no active characters. Set one using the `Character` command or create one using the `Create` command");
+                return;
+            }
+            if (Actor.Beats + amount >= 5)
+            {
+                Actor.Beats = Actor.Beats + amount;
+
+                double loops = Math.Floor((double)Actor.Beats / 5);
+
+                for (int i = 0; i < loops; i++)
+                {
+                    Actor.Experience++;
+                    Actor.Beats -= 5;
+                }
+                Actor.Beats = (Actor.Beats + amount) - 5;
+
+                Utils.UpdateActor(Actor);
+                await ReplyAsync(Context.User.Mention + ", " + Actor.Name + "/" + Actor.Name2 + " gained " + amount + " beats and " + loops + " experience!");
+                return;
+            }
+            else
+            {
+                Actor.Beats += amount;
+                Utils.UpdateActor(Actor);
+                await ReplyAsync(Context.User.Mention + ", " + Actor.Name + "/" + Actor.Name2 + " gained " + amount + " beats!");
+                return;
+            }
+        }
+        [Command("Experience"),Alias("Exp")]
+        public async Task Exp(int amount) 
+        {
+            User User = Utils.GetUser(Context.User.Id);
+            Actor Actor = User.Active;
+            if (Actor == null)
+            {
+                await ReplyAsync("You have no active characters. Set one using the `Character` command or create one using the `Create` command");
+                return;
+            }
+            if (amount == 0)
+            {
+                return;
+            }
+            if (amount > 0)
+            {
+                Actor.Experience += amount;
+
+                Utils.UpdateActor(Actor);
+                await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** gained " + amount + " experience.");
+            }
+            else if (amount < 0)
+            {
+                Actor.Experience += amount;
+
+                Utils.UpdateActor(Actor);
+                await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + amount + " experience.");
+            }
+        }
     }
 }
