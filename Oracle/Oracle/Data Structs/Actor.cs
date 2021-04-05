@@ -143,7 +143,7 @@ namespace Oracle.Data
         public int Health { get { return Math.Min(Ranks["size"], Ranks2["size"]) + Math.Max(Ranks2["stamina"], Ranks["stamina"]) + Ranks["health"];} }
 
         [BsonIgnore]
-        public int MaxWillpower { get { return Math.Max(Ranks["resolve"], Ranks2["resolve"]) + Math.Max(Ranks2["composure"], Ranks2["composure"]) + Ranks["willpower"]; } }
+        public int MaxWillpower { get { return Math.Max(Ranks["resolve"], Ranks2["resolve"]) + Math.Max(Ranks["composure"], Ranks2["composure"]) + Ranks["willpower"]; } }
         public int Penalty { get
             {
                 if (DamageTrack.Count == Health) return -3;
