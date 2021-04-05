@@ -136,7 +136,7 @@ namespace Oracle.Data
         /// <returns>The Participant list.</returns>
         public List<Participant> GetList()
         {
-            Participants = Participants.OrderByDescending(x => x.Initiative).ToList();
+            Participants = Participants.OrderBy(x => x.Initiative).ToList();
             return Participants;
         }
         /// <summary>

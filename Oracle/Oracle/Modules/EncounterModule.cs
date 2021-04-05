@@ -85,7 +85,7 @@ namespace Oracle.Modules
                 col.Update(Encounter);
 
                 var user = Context.Guild.GetUser(Encounter.Current.Player);
-                await ReplyAsync(user.Mention + ", It's " + Encounter.Current.Name + "'s turn!", false, embed);
+                await ReplyAsync(user.Mention + ", It's " + Encounter.Current.Name + "'s turn to declare their actions!", false, embed);
                 return;
             }
             else if(Encounter.Active && Encounter.Started)
@@ -326,7 +326,7 @@ namespace Oracle.Modules
 
             var user = Context.Guild.GetUser(p.Player);
 
-            await ReplyAsync(user.Mention + ", it's " + Encounter.Current.Name + "'s turn!", false, Encounter.GetEncounter(Database));
+            await ReplyAsync(user.Mention + ", it's " + Encounter.Current.Name + "'s turn to declare their actions!", false, Encounter.GetEncounter(Database));
         }
     }
 }
