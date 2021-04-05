@@ -93,16 +93,7 @@ namespace Oracle.Modules
                 "`" + prefix + "Encounter Next` - Moves to the next person in initiative.\n")
                 .WithDescription("Parameters encased with `<>` are mandatory while paramaters encased with `[]` are optional.\nIf you wish to input a parameter with spaces (Such as a name + last name) you'll have to encase it in quotation marks. Ex: `!Create \"Ethan Lockwood\" Estiebus`.");
 
-            var DMs = await Context.User.GetOrCreateDMChannelAsync();
-            try
-            {
-                await DMs.SendMessageAsync("Here's a list of all commands!", false, eb.Build());
-            }
-            catch
-            {
-                await ReplyAsync("I couldn't send you the command list because your Direct Messages are disabled!");
-            }
-
+            await ReplyAsync("Here's a list of all commands!", false, eb.Build());
         }
         [Command("Help")]
         public async Task HelpDetails(Topics topic)
@@ -142,16 +133,7 @@ namespace Oracle.Modules
                     break;
             }
 
-            var DMs = await Context.User.GetOrCreateDMChannelAsync();
-            try
-            {
-                await DMs.SendMessageAsync("Here's more info in regards to "+topic+"!", false, eb.Build());
-            }
-            catch
-            {
-                await ReplyAsync("I couldn't send you the information because your Direct Messages are disabled!");
-            }
-
+            await ReplyAsync("Here's more info in regards to " + topic + "!", false, eb.Build());
         }
         public enum Topics { Set, Merits, Rotes }
     }
