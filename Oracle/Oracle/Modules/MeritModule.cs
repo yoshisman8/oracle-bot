@@ -202,7 +202,7 @@ namespace Oracle.Modules
             {
                 var page = new PageBuilder()
                     .WithTitle(merit.Name + " " + Actor.RenderDots(merit.Ranks))
-                    .WithThumbnailUrl(Actor.Avatar);
+                    .WithThumbnailUrl(Actor.Avatar2);
                 foreach (var segment in merit.Description)
                 {
                     page.AddField("Description", segment);

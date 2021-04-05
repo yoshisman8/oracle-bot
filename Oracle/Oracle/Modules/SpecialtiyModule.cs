@@ -14,7 +14,7 @@ using Interactivity.Confirmation;
 
 namespace Oracle.Modules
 {
-    [Name("Specialty"), Alias("Specialties","Specs")]
+    [Name("Specialty"), Alias("Specialties","Specs","Spec")]
     public class SpecModule : ModuleBase<SocketCommandContext>
     {
         public LiteDatabase Database { get; set; }
@@ -77,7 +77,7 @@ namespace Oracle.Modules
             }
         }
     }
-    [Name("GSpecialty"), Alias("GSpecialties", "GSpecs")]
+    [Name("GSpecialty"), Alias("GSpecialties", "GSpecs","Gspec")]
     public class GSpecModule : ModuleBase<SocketCommandContext>
     {
         public LiteDatabase Database { get; set; }

@@ -85,10 +85,11 @@ namespace Oracle.Data
             {"spirit",0 },
             {"time",0 },
             {"wisdom",7 },
-            {"willpower",1 },
             {"gnosis",1 },
             {"size",5 },
             {"armor",0 },
+            {"willpower",0 },
+            {"health",0 },
             {"ballistic-armor",0 }
         };
         /// <summary>
@@ -139,8 +140,10 @@ namespace Oracle.Data
         public List<int> DamageTrack { get; set; } = new List<int>();
 
         [BsonIgnore]
-        public int Health { get { return Math.Min(Ranks["size"], Ranks2["size"]) + Math.Max(Ranks2["stamina"], Ranks["stamina"]);} }
+        public int Health { get { return Math.Min(Ranks["size"], Ranks2["size"]) + Math.Max(Ranks2["stamina"], Ranks["stamina"]) + Ranks["health"];} }
+
         [BsonIgnore]
+        public int MaxWillpower { get { return Math.Max(Ranks["resolve"], Ranks2["resolve"]) + Math.Max(Ranks2["composure"], Ranks2["composure"]) + Ranks["willpower"]; } }
         public int Penalty { get
             {
                 if (DamageTrack.Count == Health) return -3;
@@ -178,10 +181,12 @@ namespace Oracle.Data
 
         public List<string> Specialties2 { get; set; } = new List<string>();
 
-        public string[] StrongArcana { get; set; } = new string[2];
-        public string[] WeakArcana { get; set; } = new string[2];
+        public string[] StrongArcana { get; set; } = new string[0];
+        public string[] WeakArcana { get; set; } = new string[0];
 
-        public string[] OrderSkills { get; set; } = new string[3];
+        public string[] OrderSkills { get; set; } = new string[0];
+
+        public Dictionary<string, string> Macros { get; set; } = new Dictionary<string, string>();
         public PageBuilder[] GetSheet()
         {
             PageBuilder[] eb = new PageBuilder[2];
@@ -191,7 +196,7 @@ namespace Oracle.Data
             eb[0].WithDescription("**Health**\n" + GetHealthBar() + "\n" +
                     "**Ether** [" + Ether + "/" + Icons.MaxEther[Ranks["gnosis"]] + "]\n" +
                     GetEtherBar() + "\n" +
-                    "**Willpower** [" + Willpower + "/" + Ranks["willpower"] + "]" + "\n" +
+                    "**Willpower** [" + Willpower + "/" + MaxWillpower + "]" + "\n" +
                     GetWillPowerBar());
             eb[0].AddField("Mental Attributes", "Intelligence:" + RenderDots(Ranks["intelligence"]) + "\n" +
                     "Wits:" + RenderDots(Ranks["wits"]) + "\n" +
@@ -251,7 +256,7 @@ namespace Oracle.Data
             eb[1].WithDescription("**Health**\n" + GetHealthBar() + "\n" +
                     "**Ether** [" + Ether + "/" + Icons.MaxEther[Ranks["gnosis"]] + "]\n" +
                     GetEtherBar() + "\n" +
-                    "**Willpower*** [" + Willpower + "/" + Ranks["willpower"] + "]"+"\n"+
+                    "**Willpower*** [" + Willpower + "/" + MaxWillpower + "]"+"\n"+
                     GetWillPowerBar());
             eb[1].AddField("Mental Attributes", "Intelligence:" + RenderDots(Ranks2["intelligence"]) + "\n" +
                     "Wits:" + RenderDots(Ranks2["wits"]) + "\n" +
@@ -286,7 +291,7 @@ namespace Oracle.Data
                     "Socialize: " + RenderDots(Ranks2["socialize"]) + "\n" +
                     "Streetwise: " + RenderDots(Ranks2["streetwise"]) + "\n" +
                     "Subterfuge: " + RenderDots(Ranks2["subterfuge"]), true);
-            eb[0].AddField("Extra", "Specialties: " + string.Join("; ", Specialties2) + ".");
+            eb[1].AddField("Extra", "Specialties: " + string.Join("; ", Specialties2) + ".");
             eb[1].AddField("Arcana I", "Death\\*: " + RenderDots(Ranks["death"]) + "\n" +
                     "Fate\\*: " + RenderDots(Ranks["fate"]) + "\n" +
                     "Forces\\*: " + RenderDots(Ranks["forces"]) + "\n" +
@@ -359,7 +364,7 @@ namespace Oracle.Data
         public string GetWillPowerBar()
         {
             var sb = new StringBuilder();
-            int diff = Ranks["willpower"] - Willpower;
+            int diff = MaxWillpower - Willpower;
 
             for (int i = 0; i < Willpower; i++)
             {
@@ -384,13 +389,13 @@ namespace Oracle.Data
             }
         }
         /// <summary>
-        /// Refreshes Ether and Willpower to their new max values
+        /// Restores everything
         /// </summary>
         public void Refresh()
         {
             Ether = Icons.MaxEther[Ranks["gnosis"]];
-            Ranks["willpower"] = Math.Max(Ranks["resolve"], Ranks2["resolve"]) + Math.Max(Ranks2["composure"], Ranks2["composure"]);
-            Willpower = Ranks["willpower"];
+            Willpower = MaxWillpower;
+            DamageTrack = new List<int>();
         }
     }
     public class Merit

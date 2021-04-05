@@ -12,10 +12,12 @@ namespace Oracle.Data
     {
         [BsonId]
         public ulong Channel { get; set; }
+        public ulong Owner { get; set; }
         public List<Participant> Participants { get; set; }
         public Participant Current { get; set; }
         public int Round { get; set; } = 1;
         public bool Active { get; set; }
+        public bool Started { get; set; }
 
         /// <summary>
         /// Selects and returns the next person in the inititaive order.
@@ -23,9 +25,8 @@ namespace Oracle.Data
         /// <returns>The current Participant.</returns>
         public Participant Next()
         {
-            GetList();
-            int Index = Participants.IndexOf(Current);
-            if (Participants.Count + 1 >= Participants.Count)
+            int Index = Participants.FindIndex(x=>x.Name == Current.Name);
+            if (Index + 1 >= Participants.Count)
             {
                 Current = Participants[0];
                 Round++;
@@ -39,9 +40,8 @@ namespace Oracle.Data
         }
         public Participant Previous()
         {
-            GetList();
-            int Index = Participants.IndexOf(Current);
-            if (Participants.Count - 1 < 0)
+            int Index = Participants.FindIndex(x => x.Name == Current.Name);
+            if (Index - 1 < 0)
             {
                 Current = Participants.Last();
                 Round++;
@@ -57,13 +57,13 @@ namespace Oracle.Data
         /// Sorts the initiative and returns the embed with the current person in initiative.
         /// </summary>
         /// <returns>The encounter Embed.</returns>
-        public Embed Start()
+        public Embed Start(LiteDatabase database)
         {
             GetList();
             Round = 1;
             Current = Participants[0];
-            Active = true;
-            return GetEncounter();
+            Started = true;
+            return GetEncounter(database);
         }
         /// <summary>
         /// Clears the current encounter.
@@ -74,8 +74,10 @@ namespace Oracle.Data
             Participants = new List<Participant>();
             Round = 0;
             Active = false;
+            Started = false;
+            Owner = 0;
         }
-        public string Add(string Name, int Initiative, ulong Player, Type type = Type.NPC, int ID = -1)
+        public string Add(string Name, decimal Initiative, ulong Player = 0, Type type = Type.NPC, int ID = -1)
         {
             
             if(Participants.Exists(x=> x.Name.ToLower() == Name.ToLower()))
@@ -124,6 +126,7 @@ namespace Oracle.Data
             else {
                 if (Current == P) Previous();
                 Participants.Remove(P);
+                GetList();
                 return "Removed **" + P.Name + "** from the encounter.";
             }
         }
@@ -140,17 +143,26 @@ namespace Oracle.Data
         /// Builds and returns the encounter's Embed/
         /// </summary>
         /// <returns>The encounter Embed</returns>
-        public Embed GetEncounter()
+        public Embed GetEncounter(LiteDatabase Database)
         {
             var part = GetList();
 
             StringBuilder sb = new StringBuilder();
 
+            var col = Database.GetCollection<Actor>("Actors");
+
             foreach(var x in part)
             {
-                if(Current == x)
+                if(Current.Name == x.Name)
                 {
-                    sb.AppendLine("**[" + x.Initiative + "] **" + x.Name + ".**");
+                    sb.AppendLine("**[" + x.Initiative + "] " + x.Name + ".**");
+                    if(x.Type != Type.NPC)
+                    {
+                        var c = col.FindOne(y => y.ID == x.ID);
+                        sb.AppendLine("> "+c.GetHealthBar());
+                        sb.AppendLine("> " + c.GetEtherBar());
+                        sb.AppendLine("> " + c.GetWillPowerBar());
+                    }
                 }
                 else
                 {
@@ -171,7 +183,7 @@ namespace Oracle.Data
         public string Name { get; set; }
         public int ID { get; set; } = -1;
         public Type Type { get; set; } = Type.NPC;
-        public int Initiative { get; set; }
+        public decimal Initiative { get; set; }
         public ulong Player { get; set; }
     }
     public enum Type { Human, Guardian, NPC}

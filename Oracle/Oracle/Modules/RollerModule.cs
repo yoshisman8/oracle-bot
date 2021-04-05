@@ -40,7 +40,37 @@ namespace Oracle.Modules
 
             foreach (var x in Expression)
             {
-                if (int.TryParse(x,out int number))
+                if(Actor.Macros.TryGetValue(x.ToLower(),out string macro))
+                {
+                    string[] segements = macro.Split(" ");
+                    foreach(var y in segements)
+                    {
+                        if (int.TryParse(y, out int number2))
+                        {
+                            Bonuses.Add(y);
+                            queue.Append(y + " ");
+                        }
+                        else if (Actor.Ranks.TryGetValue(y.ToLower(), out int value2))
+                        {
+                            Bonuses.Add(value2.ToString());
+                            queue.Append(y + "(" + value2 + ") ");
+                        }
+                        else if (y == "+" || y == "-")
+                        {
+                            Bonuses.Add(y);
+                            queue.Append(y + " ");
+                        }
+                        else if (y.ToLower() == "9s")
+                        {
+                            nines = true;
+                        }
+                        else if (y.ToLower() == "8s")
+                        {
+                            eights = true;
+                        }
+                    }
+                }
+                else if (int.TryParse(x, out int number))
                 {
                     Bonuses.Add(x);
                     queue.Append(x + " ");
@@ -172,7 +202,42 @@ namespace Oracle.Modules
             var queue = new StringBuilder();
             foreach (var x in Expression)
             {
-                if (int.TryParse(x, out int number))
+                if (Actor.Macros.TryGetValue(x.ToLower(), out string macro))
+                {
+                    string[] segements = macro.Split(" ");
+                    foreach (var y in segements)
+                    {
+                        if (int.TryParse(y, out int number2))
+                        {
+                            Bonuses.Add(y);
+                            queue.Append(y + " ");
+                        }
+                        else if (Actor.Ranks2.TryGetValue(y.ToLower(), out int value2))
+                        {
+                            Bonuses.Add(value2.ToString());
+                            queue.Append(y + "(" + value2 + ") ");
+                        }
+                        else if (Actor.Ranks.TryGetValue(y.ToLower(), out int value3))
+                        {
+                            Bonuses.Add(value3.ToString());
+                            queue.Append(y + "(" + value3 + ") ");
+                        }
+                        else if (y == "+" || y == "-")
+                        {
+                            Bonuses.Add(y);
+                            queue.Append(y + " ");
+                        }
+                        else if (y.ToLower() == "9s")
+                        {
+                            nines = true;
+                        }
+                        else if (y.ToLower() == "8s")
+                        {
+                            eights = true;
+                        }
+                    }
+                }
+                else if (int.TryParse(x, out int number))
                 {
                     Bonuses.Add(x);
                     queue.Append(x+" ");
@@ -181,6 +246,11 @@ namespace Oracle.Modules
                 {
                     Bonuses.Add(value.ToString());
                     queue.Append(x + "(" + value + ") ");
+                }
+                else if (Actor.Ranks.TryGetValue(x.ToLower(), out int valueM))
+                {
+                    Bonuses.Add(valueM.ToString());
+                    queue.Append(x + "(" + valueM + ") ");
                 }
                 else if (x == "+" || x == "-")
                 {

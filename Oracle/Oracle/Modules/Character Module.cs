@@ -199,7 +199,7 @@ namespace Oracle.Modules
             Actor.Refresh();
 
             Utils.UpdateActor(Actor);
-            await ReplyAsync(Context.User.Mention + ", Refreshed **" + Actor.Name + "/" + Actor.Name2 + "**'s Max Ether and Willpower");
+            await ReplyAsync(Context.User.Mention + ", Restored **" + Actor.Name + "/" + Actor.Name2 + "**'s Ether, Willpower and Health.");
         }
         [Command("Avatar")]
         public async Task Avatar([Remainder]string url = null)
@@ -274,6 +274,7 @@ namespace Oracle.Modules
         [Command("Damage"),Alias("Dmg")]
         public async Task Damage(Damage damage, int amount)
         {
+            amount = Math.Abs(amount);
             User User = Utils.GetUser(Context.User.Id);
             Actor Actor = User.Active;
             if (Actor == null)
@@ -301,6 +302,7 @@ namespace Oracle.Modules
         [Command("Heal")]
         public async Task Heal(Damage damage, int amount)
         {
+            amount = Math.Abs(amount);
             User User = Utils.GetUser(Context.User.Id);
             Actor Actor = User.Active;
             if (Actor == null)
@@ -339,7 +341,7 @@ namespace Oracle.Modules
                 return;
             }
         }
-        [Command("Ether")]
+        [Command("Ether"),Alias("Mana")]
         public async Task Ether(int amount)
         {
             User User = Utils.GetUser(Context.User.Id);
@@ -427,7 +429,7 @@ namespace Oracle.Modules
             Utils.UpdateActor(Actor);
             await ReplyAsync(Context.User.Mention + ", Set " + Actor.Name + "/" + Actor.Name2 + "'s ruling arcana to: " + string.Join(" & ", Arcana) + ".");
         }
-        [Command("InferiorArcana"), Alias("WeakArcana", "Weak")]
+        [Command("InferiorArcana"), Alias("WeakArcana", "Weak","Inferior")]
         public async Task WeakArcana(params string[] Arcana)
         {
             User User = Utils.GetUser(Context.User.Id);
@@ -441,7 +443,7 @@ namespace Oracle.Modules
             Utils.UpdateActor(Actor);
             await ReplyAsync(Context.User.Mention + ", Set " + Actor.Name + "/" + Actor.Name2 + "'s inferior arcana to: " + string.Join(" & ", Arcana) + ".");
         }
-        [Command("OrderSkills"),Alias("Order")]
+        [Command("OrderSkills"),Alias("Order","Skills")]
         public async Task Order(params string[] Skills)
         {
             User User = Utils.GetUser(Context.User.Id);
