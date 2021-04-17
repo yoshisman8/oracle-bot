@@ -129,6 +129,7 @@ namespace Oracle.Modules
                                 case 10:
                                     sb.Append(Icons.d10[(int)dice.Value] + " ");
                                     if (dice.Value >= 8) successes++;
+                                    if (dice.Value == 1) successes--;
                                     break;
                                 default:
                                     sb.Append(dice.Value);
@@ -172,7 +173,7 @@ namespace Oracle.Modules
                             break;
                     }
                 }
-                embed.WithDescription(queue.ToString()+"\n"+sb.ToString() + "\n**" + successes + " Success" + (successes > 1 ? "es" : "") + "!**");
+                embed.WithDescription(queue.ToString()+"\n"+sb.ToString() + "\n**" + Math.Max(successes,0) + " Success" + (successes > 1 ? "es" : "") + "!**");
                 if (successes > 0) embed.WithColor(Color.Green);
                 else embed.WithColor(Color.Red);
 
@@ -301,6 +302,7 @@ namespace Oracle.Modules
                                 case 10:
                                     sb.Append(Icons.d10[(int)dice.Value] + " ");
                                     if (dice.Value >= 8) successes++;
+                                    if (dice.Value == 1) successes--;
                                     break;
                                 default:
                                     sb.Append(dice.Value);
@@ -344,7 +346,7 @@ namespace Oracle.Modules
                             break;
                     }
                 }
-                embed.WithDescription(queue.ToString() + "\n" + sb.ToString() + "\n**" + successes + " Success" + (successes > 1 ? "es" : "") + "!**");
+                embed.WithDescription(queue.ToString() + "\n" + sb.ToString() + "\n**" + Math.Max(successes,0) + " Success" + (successes > 1 ? "es" : "") + "!**");
                 if (successes > 0) embed.WithColor(Color.Green);
                 else embed.WithColor(Color.Red);
 

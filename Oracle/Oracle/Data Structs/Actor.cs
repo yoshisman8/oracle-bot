@@ -234,7 +234,7 @@ namespace Oracle.Data
                     "Socialize: " + RenderDots(Ranks["socialize"]) + "\n" +
                     "Streetwise: " + RenderDots(Ranks["streetwise"]) + "\n" +
                     "Subterfuge: " + RenderDots(Ranks["subterfuge"]), true);
-            eb[0].AddField("Extra", "Specialties: "+string.Join("; ", Specialties)+".\nOrder Skills: " + string.Join("; ", OrderSkills) + ".");
+            eb[0].AddField("Extra", "**Specialties**: "+string.Join("; ", Specialties)+".\n**Order Skills**: " + string.Join("; ", OrderSkills) + ".");
             eb[0].AddField("Arcana I", "Death: " + RenderDots(Ranks["death"]) + "\n" +
                     "Fate: " + RenderDots(Ranks["fate"]) + "\n" +
                     "Forces: " + RenderDots(Ranks["forces"]) + "\n" +
@@ -295,7 +295,7 @@ namespace Oracle.Data
                     "Socialize: " + RenderDots(Ranks2["socialize"]) + "\n" +
                     "Streetwise: " + RenderDots(Ranks2["streetwise"]) + "\n" +
                     "Subterfuge: " + RenderDots(Ranks2["subterfuge"]), true);
-            eb[1].AddField("Extra", "Specialties: " + string.Join("; ", Specialties2) + ".");
+            eb[1].AddField("Extra", "**Specialties**: " + string.Join("; ", Specialties2) + ".");
             eb[1].AddField("Arcana I", "Death\\*: " + RenderDots(Ranks["death"]) + "\n" +
                     "Fate\\*: " + RenderDots(Ranks["fate"]) + "\n" +
                     "Forces\\*: " + RenderDots(Ranks["forces"]) + "\n" +
