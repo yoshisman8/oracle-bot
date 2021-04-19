@@ -201,15 +201,15 @@ namespace Oracle.Data
                     GetEtherBar() + "\n" +
                     "**Willpower** [" + Willpower + "/" + MaxWillpower + "]" + "\n" +
                     GetWillPowerBar());
-            eb[0].AddField("Mental Attributes", "Intelligence:" + RenderDots(Ranks["intelligence"]) + "\n" +
-                    "Wits:" + RenderDots(Ranks["wits"]) + "\n" +
-                    "Resolve:" + RenderDots(Ranks["resolve"]), true);
-            eb[0].AddField("Physical Attributes", "Strength:" + RenderDots(Ranks["strength"]) + "\n" +
-                    "Dexterity:" + RenderDots(Ranks["dexterity"]) + "\n" +
-                    "Stamina:" + RenderDots(Ranks["stamina"]), true);
-            eb[0].AddField("Social Attributes", "Presence:" + RenderDots(Ranks["presence"]) + "\n" +
-                    "Manipulation:" + RenderDots(Ranks["manipulation"]) + "\n" +
-                    "Composure:" + RenderDots(Ranks["composure"]), true);
+            eb[0].AddField("Mental Attributes", "Intelligence: " + RenderDots(Ranks["intelligence"]) + "\n" +
+                    "Wits: " + RenderDots(Ranks["wits"]) + "\n" +
+                    "Resolve: " + RenderDots(Ranks["resolve"]), true);
+            eb[0].AddField("Physical Attributes", "Strength: " + RenderDots(Ranks["strength"]) + "\n" +
+                    "Dexterity: " + RenderDots(Ranks["dexterity"]) + "\n" +
+                    "Stamina: " + RenderDots(Ranks["stamina"]), true);
+            eb[0].AddField("Social Attributes", "Presence: " + RenderDots(Ranks["presence"]) + "\n" +
+                    "Manipulation: " + RenderDots(Ranks["manipulation"]) + "\n" +
+                    "Composure: " + RenderDots(Ranks["composure"]), true);
             eb[0].AddField("Mental Skills", "Academics: " + RenderDots(Ranks["academics"]) + "\n" +
                     "Computers: " + RenderDots(Ranks["computers"]) + "\n" +
                     "Crafts: " + RenderDots(Ranks["crafts"]) + "\n" +
@@ -262,15 +262,15 @@ namespace Oracle.Data
                     GetEtherBar() + "\n" +
                     "**Willpower*** [" + Willpower + "/" + MaxWillpower + "]"+"\n"+
                     GetWillPowerBar());
-            eb[1].AddField("Mental Attributes", "Intelligence:" + RenderDots(Ranks2["intelligence"]) + "\n" +
-                    "Wits:" + RenderDots(Ranks2["wits"]) + "\n" +
-                    "Resolve:" + RenderDots(Ranks2["resolve"]), true);
-            eb[1].AddField("Physical Attributes", "Strength:" + RenderDots(Ranks2["strength"]) + "\n" +
-                    "Dexterity:" + RenderDots(Ranks2["dexterity"]) + "\n" +
-                    "Stamina:" + RenderDots(Ranks2["stamina"]), true);
+            eb[1].AddField("Mental Attributes", "Intelligence: " + RenderDots(Ranks2["intelligence"]) + "\n" +
+                    "Wits: " + RenderDots(Ranks2["wits"]) + "\n" +
+                    "Resolve: " + RenderDots(Ranks2["resolve"]), true);
+            eb[1].AddField("Physical Attributes", "Strength: " + RenderDots(Ranks2["strength"]) + "\n" +
+                    "Dexterity: " + RenderDots(Ranks2["dexterity"]) + "\n" +
+                    "Stamina: " + RenderDots(Ranks2["stamina"]), true);
             eb[1].AddField("Social Attributes", "Presence: " + RenderDots(Ranks2["presence"]) + "\n" +
-                    "Manipulation:" + RenderDots(Ranks2["manipulation"]) + "\n" +
-                    "Composure:" + RenderDots(Ranks2["composure"]), true);
+                    "Manipulation: " + RenderDots(Ranks2["manipulation"]) + "\n" +
+                    "Composure: " + RenderDots(Ranks2["composure"]), true);
             eb[1].AddField("Mental Skills", "Academics: " + RenderDots(Ranks2["academics"]) + "\n" +
                     "Computers: " + RenderDots(Ranks2["computers"]) + "\n" +
                     "Crafts: " + RenderDots(Ranks2["crafts"]) + "\n" +
