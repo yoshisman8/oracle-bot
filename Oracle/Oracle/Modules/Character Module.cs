@@ -375,7 +375,7 @@ namespace Oracle.Modules
                 Actor.Ether += amount;
 
                 Utils.UpdateActor(Actor);
-                await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + amount + " ether.");
+                await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + Math.Abs( amount) + " ether.");
             }
         }
         [Command("Willpower"), Alias("WP","Will")]
@@ -396,7 +396,7 @@ namespace Oracle.Modules
             {
                 if (Actor.Willpower + amount >= Actor.Ranks["willpower"])
                 {
-                    amount = Actor.Ranks["willpower"] - Actor.Willpower;
+                    amount = Actor.Ranks["willpower"] + Actor.Willpower;
                 }
                 Actor.Willpower += amount;
 
@@ -412,7 +412,7 @@ namespace Oracle.Modules
                 Actor.Willpower += amount;
 
                 Utils.UpdateActor(Actor);
-                await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + amount + " willpower.");
+                await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + Math.Abs(amount) + " willpower.");
             }
         }
         [Command("RulingArcana"),Alias("StrongArcana","SuperiorArcana","Superior","Ruling","Strong")]
