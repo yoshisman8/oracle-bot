@@ -200,7 +200,8 @@ namespace Oracle.Data
                     "**Ether** [" + Ether + "/" + Icons.MaxEther[Ranks["gnosis"]] + "]\n" +
                     GetEtherBar() + "\n" +
                     "**Willpower** [" + Willpower + "/" + MaxWillpower + "]" + "\n" +
-                    GetWillPowerBar());
+                    GetWillPowerBar()+"\n"+
+                    "Experience (" + new string('●', Beats) + "): " + Experience);
             eb[0].AddField("Mental Attributes", "Intelligence: " + RenderDots(Ranks["intelligence"]) + "\n" +
                     "Wits: " + RenderDots(Ranks["wits"]) + "\n" +
                     "Resolve: " + RenderDots(Ranks["resolve"]), true);
@@ -250,9 +251,9 @@ namespace Oracle.Data
             eb[0].AddField("Statistics", "Wisdom: " + Ranks["wisdom"] + "\n" +
                     "Gnosis: " + Ranks["gnosis"] + "\n" +
                     "Size: " + Ranks["size"] + "\n" +
-                    "Defense: " + (Math.Min(Ranks["dexterity"], Ranks["composure"]) + Ranks["athletics"] + Ranks["armor"]) + "/" + (Math.Min(Ranks["dexterity"], Ranks["composure"]) + Ranks["athletics"] + Ranks["ballistic-armor"]) + "\n" +
-                    "Perception: " + (Ranks["wits"] + Ranks["composure"])+ "\n"+
-                    "Experience ("+new string('●', Beats)+"): "+Experience, true);
+                    "Defense: " + (Math.Min(Ranks["dexterity"], Ranks["composure"]) + Ranks["athletics"]) + "\n" +
+                    "Armor: " + Ranks["armor"] + "/" + Ranks["ballistic-armor"] + "\n" +
+                    "Perception: " + (Ranks["wits"] + Ranks["composure"]), true);
 
             eb[1] = new PageBuilder();
             eb[1].WithTitle(Name2);
@@ -261,7 +262,8 @@ namespace Oracle.Data
                     "**Ether** [" + Ether + "/" + Icons.MaxEther[Ranks["gnosis"]] + "]\n" +
                     GetEtherBar() + "\n" +
                     "**Willpower*** [" + Willpower + "/" + MaxWillpower + "]"+"\n"+
-                    GetWillPowerBar());
+                    GetWillPowerBar() + "\n" +
+                    "Experience (" + new string('●', Beats) + "): " + Experience);
             eb[1].AddField("Mental Attributes", "Intelligence: " + RenderDots(Ranks2["intelligence"]) + "\n" +
                     "Wits: " + RenderDots(Ranks2["wits"]) + "\n" +
                     "Resolve: " + RenderDots(Ranks2["resolve"]), true);
@@ -311,7 +313,8 @@ namespace Oracle.Data
             eb[1].AddField("Statistics", "Wisdom\\*: " + Ranks["wisdom"] + "\n" +
                     "Gnosis\\*: " + Ranks["gnosis"] + "\n" +
                     "Size: " + Ranks2["size"] + "\n" +
-                    "Defense: " + (Math.Min(Ranks2["dexterity"], Ranks2["composure"])+Ranks2["athletics"] + Ranks2["armor"]) + "/" + (Math.Min(Ranks2["dexterity"], Ranks2["composure"]) + Ranks2["athletics"] + Ranks2["ballistic-armor"]) + "\n" +
+                    "Defense: " + (Math.Min(Ranks2["dexterity"], Ranks2["composure"])+Ranks2["athletics"]) + "\n" +
+                    "Armor: "+Ranks2["armor"]+"/"+Ranks2["ballistic-armor"] +"\n"+
                     "Perception: " + (Ranks2["wits"] + Ranks2["composure"]),true);
             eb[1].WithFooter("Values with an asterisk(*) can only be changed with `!set` and not `!GSet`.");
             return eb;
