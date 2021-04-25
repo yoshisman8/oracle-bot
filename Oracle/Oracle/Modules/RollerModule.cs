@@ -55,8 +55,8 @@ namespace Oracle.Modules
                         {
                             if (value2 <= 0)
                             {
-                                Bonuses.Add("-" + Icons.Skills[y]);
-                                queue.Append(y + "(Untrained: " + "-" + value2 + ") ");
+                                Bonuses.Add("-" + (int)Icons.Skills[y]);
+                                queue.Append(y + "(Untrained: " + "-" + (int)Icons.Skills[y] + ") ");
                             }
                             else
                             {
@@ -86,8 +86,16 @@ namespace Oracle.Modules
                 }
                 else if (Actor.Ranks.TryGetValue(x.ToLower(), out int value))
                 {
-                    Bonuses.Add(value.ToString());
-                    queue.Append(x + "(" + value + ") ");
+                    if (value <= 0)
+                    {
+                        Bonuses.Add("-" + (int)Icons.Skills[x]);
+                        queue.Append(x + "(Untrained: " + "-" + (int)Icons.Skills[x] + ") ");
+                    }
+                    else
+                    {
+                        Bonuses.Add(value.ToString());
+                        queue.Append(x + "(" + value + ") ");
+                    }
                 }
                 else if (x == "+" || x == "-")
                 {
@@ -119,7 +127,7 @@ namespace Oracle.Modules
             {
                 bool fate = false;
                 var total = new DataTable().Compute(string.Join(" ", Bonuses), null);
-                if(int.TryParse((string)total,out int totalint))
+                if(int.TryParse(total.ToString(),out int totalint))
                 {
                     if (totalint <= 0)
                     {
@@ -201,7 +209,7 @@ namespace Oracle.Modules
                     }
                 }
                 string print = "";
-                if(successes > 1 && !fate)
+                if(successes >= 1 && !fate)
                 {
                     print += successes + " Successes!";
                 }
@@ -209,7 +217,7 @@ namespace Oracle.Modules
                 {
                     print += "Failure!";
                 }
-                else if(successes > 1 && fate)
+                else if(successes >= 1 && fate)
                 {
                     print += "Dramatic Success!";
                 }
@@ -261,8 +269,8 @@ namespace Oracle.Modules
                         {
                             if (value2 <= 0)
                             {
-                                Bonuses.Add("-" + Icons.Skills[y]);
-                                queue.Append(y + "(Untrained: " + "-" + value2 + ") ");
+                                Bonuses.Add("-" + (int)Icons.Skills[y]);
+                                queue.Append(y + "(Untrained: " + "-" + (int)Icons.Skills[y] + ") ");
                             }
                             else
                             {
@@ -274,8 +282,8 @@ namespace Oracle.Modules
                         {
                             if (value3 <= 0)
                             {
-                                Bonuses.Add("-" + Icons.Skills[y]);
-                                queue.Append(y + "(Untrained: " + "-" + value3 + ") ");
+                                Bonuses.Add("-" + (int)Icons.Skills[y]);
+                                queue.Append(y + "(Untrained: " + "-" + (int)Icons.Skills[y] + ") ");
                             }
                             else
                             {
@@ -305,13 +313,29 @@ namespace Oracle.Modules
                 }
                 else if (Actor.Ranks2.TryGetValue(x.ToLower(), out int value))
                 {
-                    Bonuses.Add(value.ToString());
-                    queue.Append(x + "(" + value + ") ");
+                    if (value <= 0)
+                    {
+                        Bonuses.Add("-" + (int)Icons.Skills[x]);
+                        queue.Append(x + "(Untrained: " + "-" + (int)Icons.Skills[x] + ") ");
+                    }
+                    else
+                    {
+                        Bonuses.Add(value.ToString());
+                        queue.Append(x + "(" + value + ") ");
+                    }
                 }
                 else if (Actor.Ranks.TryGetValue(x.ToLower(), out int valueM))
                 {
-                    Bonuses.Add(valueM.ToString());
-                    queue.Append(x + "(" + valueM + ") ");
+                    if (valueM <= 0)
+                    {
+                        Bonuses.Add("-" + (int)Icons.Skills[x]);
+                        queue.Append(x + "(Untrained: " + "-" + (int)Icons.Skills[x] + ") ");
+                    }
+                    else
+                    {
+                        Bonuses.Add(valueM.ToString());
+                        queue.Append(x + "(" + valueM + ") ");
+                    }
                 }
                 else if (x == "+" || x == "-")
                 {
@@ -344,7 +368,7 @@ namespace Oracle.Modules
             {
                 bool fate = false;
                 var total = new DataTable().Compute(string.Join(" ", Bonuses), null);
-                if (int.TryParse((string)total, out int totalint))
+                if (int.TryParse(total.ToString(), out int totalint))
                 {
                     if (totalint <= 0)
                     {
@@ -426,7 +450,7 @@ namespace Oracle.Modules
                     }
                 }
                 string print = "";
-                if (successes > 1 && !fate)
+                if (successes >= 1 && !fate)
                 {
                     print += successes + " Successes!";
                 }
@@ -434,7 +458,7 @@ namespace Oracle.Modules
                 {
                     print += "Failure!";
                 }
-                else if (successes > 1 && fate)
+                else if (successes >= 1 && fate)
                 {
                     print += "Dramatic Success!";
                 }
