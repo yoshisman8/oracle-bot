@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 using Discord;
 using Discord.Commands;
 using System.Threading.Tasks;
@@ -52,8 +53,16 @@ namespace Oracle.Modules
                         }
                         else if (Actor.Ranks.TryGetValue(y.ToLower(), out int value2))
                         {
-                            Bonuses.Add(value2.ToString());
-                            queue.Append(y + "(" + value2 + ") ");
+                            if (value2 <= 0)
+                            {
+                                Bonuses.Add("-" + Icons.Skills[y]);
+                                queue.Append(y + "(Untrained: " + "-" + value2 + ") ");
+                            }
+                            else
+                            {
+                                Bonuses.Add(value2.ToString());
+                                queue.Append(y + "(" + value2 + ") ");
+                            }
                         }
                         else if (y == "+" || y == "-")
                         {
@@ -100,7 +109,6 @@ namespace Oracle.Modules
                 Bonuses.Add(Actor.Penalty.ToString());
                 queue.Append("- Health Penalty(" + Actor.Penalty + ")");
             }
-
             if (nines && eights)
             {
                 await ReplyAsync(Context.User.Mention + ", You can't have Repeating 9s and Repeating 8s on at the same time!");
@@ -109,7 +117,26 @@ namespace Oracle.Modules
 
             try
             {
-                var result = Roller.Roll("(" + string.Join(" ", Bonuses) + ")d10!e" + (nines ? "9" : "") + (eights ? "8" : ""));
+                bool fate = false;
+                var total = new DataTable().Compute(string.Join(" ", Bonuses), null);
+                if(int.TryParse((string)total,out int totalint))
+                {
+                    if (totalint <= 0)
+                    {
+                        fate = true;
+                    }
+                }
+
+                RollResult result = null;
+                if (fate)
+                {
+                    result = Roller.Roll("1d10!e" + (nines ? "9" : "") + (eights ? "8" : ""));
+                }
+                else
+                {
+                    result = Roller.Roll("(" + string.Join(" ", Bonuses) + ")d10!e" + (nines ? "9" : "") + (eights ? "8" : ""));
+                }
+                
                 var embed = new EmbedBuilder()
                 .WithCurrentTimestamp()
                 .WithThumbnailUrl(Actor.Avatar)
@@ -173,7 +200,24 @@ namespace Oracle.Modules
                             break;
                     }
                 }
-                embed.WithDescription(queue.ToString()+"\n"+sb.ToString() + "\n**" + Math.Max(successes,0) + " Success" + (successes > 1 ? "es" : "") + "!**");
+                string print = "";
+                if(successes > 1 && !fate)
+                {
+                    print += successes + " Successes!";
+                }
+                else if(successes <1 && !fate)
+                {
+                    print += "Failure!";
+                }
+                else if(successes > 1 && fate)
+                {
+                    print += "Dramatic Success!";
+                }
+                else if(successes <1 && fate)
+                {
+                    print += "Dramatic Failure!";
+                }
+                embed.WithDescription(queue.ToString()+"\n"+sb.ToString() + "\n**" + print+"**");
                 if (successes > 0) embed.WithColor(Color.Green);
                 else embed.WithColor(Color.Red);
 
@@ -215,13 +259,29 @@ namespace Oracle.Modules
                         }
                         else if (Actor.Ranks2.TryGetValue(y.ToLower(), out int value2))
                         {
-                            Bonuses.Add(value2.ToString());
-                            queue.Append(y + "(" + value2 + ") ");
+                            if (value2 <= 0)
+                            {
+                                Bonuses.Add("-" + Icons.Skills[y]);
+                                queue.Append(y + "(Untrained: " + "-" + value2 + ") ");
+                            }
+                            else
+                            {
+                                Bonuses.Add(value2.ToString());
+                                queue.Append(y + "(" + value2 + ") ");
+                            }
                         }
                         else if (Actor.Ranks.TryGetValue(y.ToLower(), out int value3))
                         {
-                            Bonuses.Add(value3.ToString());
-                            queue.Append(y + "(" + value3 + ") ");
+                            if (value3 <= 0)
+                            {
+                                Bonuses.Add("-" + Icons.Skills[y]);
+                                queue.Append(y + "(Untrained: " + "-" + value3 + ") ");
+                            }
+                            else
+                            {
+                                Bonuses.Add(value3.ToString());
+                                queue.Append(y + "(" + value3 + ") ");
+                            }
                         }
                         else if (y == "+" || y == "-")
                         {
@@ -282,7 +342,26 @@ namespace Oracle.Modules
 
             try
             {
-                var result = Roller.Roll("(" + string.Join(" ", Bonuses) + ")d10!e" + (nines ? "9" : "") + (eights ? "8" : ""));
+                bool fate = false;
+                var total = new DataTable().Compute(string.Join(" ", Bonuses), null);
+                if (int.TryParse((string)total, out int totalint))
+                {
+                    if (totalint <= 0)
+                    {
+                        fate = true;
+                    }
+                }
+
+                RollResult result = null;
+                if (fate)
+                {
+                    result = Roller.Roll("1d10!e" + (nines ? "9" : "") + (eights ? "8" : ""));
+                }
+                else
+                {
+                    result = Roller.Roll("(" + string.Join(" ", Bonuses) + ")d10!e" + (nines ? "9" : "") + (eights ? "8" : ""));
+                }
+
                 var embed = new EmbedBuilder()
                 .WithCurrentTimestamp()
                 .WithThumbnailUrl(Actor.Avatar2)
@@ -346,7 +425,24 @@ namespace Oracle.Modules
                             break;
                     }
                 }
-                embed.WithDescription(queue.ToString() + "\n" + sb.ToString() + "\n**" + Math.Max(successes,0) + " Success" + (successes > 1 ? "es" : "") + "!**");
+                string print = "";
+                if (successes > 1 && !fate)
+                {
+                    print += successes + " Successes!";
+                }
+                else if (successes < 1 && !fate)
+                {
+                    print += "Failure!";
+                }
+                else if (successes > 1 && fate)
+                {
+                    print += "Dramatic Success!";
+                }
+                else if (successes < 1 && fate)
+                {
+                    print += "Dramatic Failure!";
+                }
+                embed.WithDescription(queue.ToString() + "\n" + sb.ToString() + "\n**" + print + "**");
                 if (successes > 0) embed.WithColor(Color.Green);
                 else embed.WithColor(Color.Red);
 

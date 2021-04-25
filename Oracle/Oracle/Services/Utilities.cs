@@ -143,7 +143,48 @@ namespace Oracle.Services
 			{1, "<:1:827589602030125126>" },
 			{0, "<:0:827648368544186379> " }
 		};
+		public static List<Attainment> Attainments { get; set; } = new List<Attainment>()
+		{
+			{ new Attainment("Counterspell","any",1,"Knowledge of one Arcanum imparts the understanding of how to unravel it. To cast a spell, the mage forms an Imago; to counter a spell, the mage simply needs to disrupt one. The Counterspell Attainment is actually 10 different Attainments, one for each Arcanum. By learning even the most basic principles of an Arcanum, a mage understands how to counter a spell. By the time a spell takes effect and a mage feels it in Peripheral Mage Sight, though, it’s too late to counter; to use this Attainment, the countering mage must see her rival casting in Active Mage Sight.", "Counterspell is a Clash of Wills (see p. 117), pitting the acting mage’s Gnosis + Arcanum against the countering mage’s Gnosis + Arcanum. A mage can attempt to counter any spell that uses the Arcanum, even if it uses other Arcana as well, but always counters the highest Arcanum of a target spell. The comparative ratings of the two mages’ Arcana are irrelevant; an Initiate can, in theory, counter the spell of a Master. Countering the spell of a mage with a higher rating in the target Arcanum, however, requires that the player spend a point of Mana. Counterspell requires an instant action. If the mage is employing Active Mage Sight (see p. 90), she can attempt to counter a spell of the appropriate Arcanum in combat, regardless of her position in the Initiative order, provided she has not used her action yet.") },
+			{ new Attainment("Eyes of the Dead","death",2,"The mage can see ghosts and souls in Twilight when using Active Mage Sight with Death. Her Peripheral Mage Sight reacts to even the passive presence of ghosts.","The mage detects ghosts and deathly Twilight phenomena with her Periphery, and can automatically see souls and ghosts in Twilight with her Death Sight. If a ghost is using a power to hide, it provokes a Clash of Wills. With the expenditure of one point of Mana, the mage can interact with ghosts for a scene. She can speak with them, touch them, and even strike them. However, this renders her vulnerable to their attentions, as well.") },
+			{ new Attainment("Conditional Duration","fate", 2, "The mage can, as well as assigning Duration with a spell factor, create a condition under which the spell ceases to function. Doing so can increase the Duration of a spell, although the mage must still spend Mana and a Reach if Duration becomes indefinite. The more improbable the condition, the smaller the bonus to Duration. Some mages use the Conditional Duration to levy curses designed to teach a target a lesson (“You will suffer boils on your hands until you dirty your hands helping another out of kindness.”), while others employ this Attainment tactically (“This floor will vanish the second I snap this glass rod.”).","Spend a point of Mana to add a Conditional Duration to a spell. Doing so adds factors to the spell’s Duration based on the nature of the condition.\nAn **improbable** condition (one that is unlikely to happen given current conditions) adds a level of Duration.\nAn **infrequent** condition (one that will eventually happen, but does not happen often on its own) adds two levels of Duration.\nA **common** condition (one that will almost certainly happen in the near future) adds three levels of Duration.\nWhen the condition is met, the spell ends regardless of how much Duration remains.") },
+			{ new Attainment("Precise Force","forces",2,"The mage understands the intricacies of Forces to such a degree that she can optimize their intentional application, perfectly directing her energy when striking an object with a mundane attack or spell that involves a physical projectile.", "If the mage has a full turn to calculate her action, she can take the 9-Again quality on the roll. If she’s applying force to a stationary object, she can ignore two points of Durability, and a successful hit automatically causes two additional Structure damage. Against a stationary, armored target, this strike destroys (and ignores) 1/1 armor if successful. This Attainment doesn’t work against anything moving faster than a casual walk.") },
+			{ new Attainment("Improved Pattern Restoration","life",2,"All mages can spend Mana to heal wounds, but an Apprentice of Life can use that Mana more efficiently, healing more or more serious wounds with the same amount of energy. In addition, Scouring her Pattern for Mana becomes easier and less detrimental.","Instead of each bashing or lethal wound costing three points of Mana, the mage can heal bashing damage at a rate of one wound per point of Mana, and lethal damage at a rate of one wound per two points of Mana. In addition, if the mage Scours a Physical Attribute, any derived traits based on that Attribute are not affected (for instance, the mage can Scour a dot of Strength without losing a point of Speed).") },
+			{ new Attainment("Permanence","matter",2,"Changing an object’s nature and properties is easier than changing the nature of a living being. An Apprentice of Matter need simply make a small investment of energy to an object to make any Matter spell’s effects long-lasting.","The character may spend one Mana instead of using a Reach to use the Advanced Duration spell factor of a spell with Matter as its highest Arcanum.") },
+			{ new Attainment("Mind's Eye","mind",2,"The mage can see Goetia, other Astral entities, and beings using supernatural powers to project out of their bodies in Twilight when using Active Mage Sight with Mind. Her Peripheral Mage Sight reacts to even the passive presence of such entities.","The mage detects Goetia and Mental Twilight phenomena with her Periphery, and can automatically see Goetia and projecting beings in Twilight with her Mind Sight. If a Goetia is using a power to hide, it provokes a Clash of Wills. With the expenditure of one point of Mana, the mage can interact with Goetia for a scene. She can speak with them, touch them, and even strike them. However, this renders her vulnerable to their attentions, as well.") },
+			{ new Attainment("Universal Counterspell","prime",2,"An Apprentice of Prime understands the formation of spells and the creation of an Imago well enough to attack it on a direct, metaphysical level, allowing her a great deal more defensive capability.","The mage may use Counterspell on any Awakened spell. The player rolls Gnosis + Prime when the character does not know the Arcanum used, or when this would be a higher dice pool than the appropriate Arcanum. The mage may also spend a point of Mana to Counter a spell’s lowest Arcanum rather than its primary Arcanum. For example, a mage with this Attainment Countering a Fate 4, Space 2 spell may pay a point of Mana to roll the Clash of Wills against Gnosis + Space instead of Gnosis + Fate.") },
+			{ new Attainment("Sympathetic Range","space",2,"An Apprentice of Space can cast spells using her sympathy to a subject she cannot see. The mage requires a sympathetic connection to the subject, and a Yantra symbolizing that subject to use as a focus for the spell.","To use this Attainment, the mage must be casting a spell at sensory range, use a sympathy Yantra, and spend one Mana. The spell is Withstood by the fragility of the sympathetic connection (p.173), between the mage and her subject, but if the mage does not know the sympathetic name of the subject the Withstand level increases by one.") }
+		};
+		public static Dictionary<string, SkillType> Skills { get; set; } = new Dictionary<string, SkillType>()
+		{
+			{"academics",SkillType.Mental },
+			{"computers",SkillType.Mental },
+			{"crafts",SkillType.Mental },
+			{"investigation",SkillType.Mental},
+			{"medicine",SkillType.Mental },
+			{"occult",SkillType.Mental },
+			{"politics",SkillType.Mental},
+			{"science",SkillType.Mental},
+			{"athletics",SkillType.Physical},
+			{"brawl",SkillType.Physical },
+			{"drive",SkillType.Physical},
+			{"firearms",SkillType.Physical},
+			{"larceny",SkillType.Physical},
+			{"stealth",SkillType.Physical},
+			{"survival",SkillType.Physical},
+			{"weaponry",SkillType.Physical},
+			{"animal-ken",SkillType.Social },
+			{"empathy",SkillType.Social },
+			{"expression",SkillType.Social },
+			{"intimidation",SkillType.Social },
+			{"persuasion",SkillType.Social },
+			{"socialize",SkillType.Social },
+			{"streetwise",SkillType.Social },
+			{"subterfuge",SkillType.Social }
+		};
 	}
+
 	public enum Damage { bashing = 1, b = 1, lethal =2, l = 2, aggravated = 3, a = 3}
 	public enum DamageLong { Bashing = 1, Lethal = 2, Aggravated = 3}
+	public enum SkillType { Mental = 3, Physical = 1, Social = 1}
 }
