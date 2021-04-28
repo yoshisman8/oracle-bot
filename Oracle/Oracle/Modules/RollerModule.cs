@@ -64,6 +64,11 @@ namespace Oracle.Modules
                                 queue.Append(y + "(" + value2 + ") ");
                             }
                         }
+                        else if(y.ToLower() == "perception")
+                        {
+                            Bonuses.Add((Actor.Ranks["wits"] + Actor.Ranks["composure"]).ToString());
+                            queue.Append("Perception(" + (Actor.Ranks["wits"] + Actor.Ranks["composure"]) + ")");
+                        }
                         else if (y == "+" || y == "-")
                         {
                             Bonuses.Add(y);
@@ -96,6 +101,11 @@ namespace Oracle.Modules
                         Bonuses.Add(value.ToString());
                         queue.Append(x + "(" + value + ") ");
                     }
+                }
+                else if (x.ToLower() == "perception")
+                {
+                    Bonuses.Add((Actor.Ranks["wits"] + Actor.Ranks["composure"]).ToString());
+                    queue.Append("Perception(" + (Actor.Ranks["wits"] + Actor.Ranks["composure"]) + ")");
                 }
                 else if (x == "+" || x == "-")
                 {
@@ -291,6 +301,11 @@ namespace Oracle.Modules
                                 queue.Append(y + "(" + value3 + ") ");
                             }
                         }
+                        else if (y.ToLower() == "perception")
+                        {
+                            Bonuses.Add((Actor.Ranks2["wits"] + Actor.Ranks2["composure"]).ToString());
+                            queue.Append("Perception(" + (Actor.Ranks2["wits"] + Actor.Ranks2["composure"]) + ")");
+                        }
                         else if (y == "+" || y == "-")
                         {
                             Bonuses.Add(y);
@@ -336,6 +351,11 @@ namespace Oracle.Modules
                         Bonuses.Add(valueM.ToString());
                         queue.Append(x + "(" + valueM + ") ");
                     }
+                }
+                else if (x.ToLower() == "perception")
+                {
+                    Bonuses.Add((Actor.Ranks2["wits"] + Actor.Ranks2["composure"]).ToString());
+                    queue.Append("Perception(" + (Actor.Ranks2["wits"] + Actor.Ranks2["composure"]) + ")");
                 }
                 else if (x == "+" || x == "-")
                 {
