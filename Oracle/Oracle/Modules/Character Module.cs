@@ -409,7 +409,7 @@ namespace Oracle.Modules
                 {
                     amount = Actor.Willpower;
                 }
-                Actor.Willpower -= amount;
+                Actor.Willpower += amount;
 
                 Utils.UpdateActor(Actor);
                 await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + Math.Abs(amount) + " willpower.");
