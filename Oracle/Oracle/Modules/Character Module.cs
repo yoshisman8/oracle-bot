@@ -394,9 +394,9 @@ namespace Oracle.Modules
             }
             if (amount > 0)
             {
-                if ((Actor.Willpower + amount) >= Actor.Ranks["willpower"])
+                if ((Actor.Willpower + amount) >= Actor.MaxWillpower)
                 {
-                    amount = Actor.Ranks["willpower"] - Actor.Willpower;
+                    amount = Actor.MaxWillpower - Actor.Willpower;
                 }
                 Actor.Willpower += amount;
 
