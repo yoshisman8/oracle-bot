@@ -357,7 +357,7 @@ namespace Oracle.Modules
             }
             if(amount > 0)
             {
-                if (Actor.Ether + amount >= Icons.MaxEther[Actor.Ranks["gnosis"]])
+                if ((Actor.Ether + amount) >= Icons.MaxEther[Actor.Ranks["gnosis"]])
                 {
                     amount = Icons.MaxEther[Actor.Ranks["gnosis"]] - Actor.Ether;
                 }
@@ -368,11 +368,11 @@ namespace Oracle.Modules
             }
             else if(amount < 0)
             {
-                if (Actor.Ether - amount <= 0)
+                if ((Actor.Ether - amount) <= 0)
                 {
                     amount = Actor.Ether;
                 }
-                Actor.Ether += amount;
+                Actor.Ether -= amount;
 
                 Utils.UpdateActor(Actor);
                 await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + Math.Abs( amount) + " ether.");
@@ -394,7 +394,7 @@ namespace Oracle.Modules
             }
             if (amount > 0)
             {
-                if (Actor.Willpower + amount >= Actor.Ranks["willpower"])
+                if ((Actor.Willpower + amount) >= Actor.Ranks["willpower"])
                 {
                     amount = Actor.Ranks["willpower"] - Actor.Willpower;
                 }
@@ -409,7 +409,7 @@ namespace Oracle.Modules
                 {
                     amount = Actor.Willpower;
                 }
-                Actor.Willpower += amount;
+                Actor.Willpower -= amount;
 
                 Utils.UpdateActor(Actor);
                 await ReplyAsync(Context.User.Mention + ", **" + Actor.Name + "/" + Actor.Name2 + "** spent " + Math.Abs(amount) + " willpower.");
